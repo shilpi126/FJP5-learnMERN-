@@ -81,28 +81,28 @@ delete captAmerica.lastName;
 //console.log(captAmerica.lastName);
 
 
-let car = {
-    name: "Ferrari",
-    model: 2022,
-    startEngine: function () {
-        console.log(`Starting the engine of the car ${this.name}`)
-    }
-}
+// let car = {
+//     name: "Ferrari",
+//     model: 2022,
+//     startEngine: function () {
+//         console.log(`Starting the engine of the car ${this.name}`)
+//     }
+// }
 
-car.startEngine();
+// car.startEngine();
 
 
 // methods-> objects ke andar function
 
 
 
-let ar = ["a", "b", 1, true];
+// let ar = ["a", "b", 1, true];
 
-let arrr = {
-    0: "a",
-    1: "b",
-    2: 1,
-    3:true
-}
+// let arrr = {
+//     0: "a",
+//     1: "b",
+//     2: 1,
+//     3:true
+// }
 
 
