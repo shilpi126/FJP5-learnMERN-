@@ -63,7 +63,7 @@
   font-size: 10px;
 }
 
-.movie-list{
+.movies-list{
   display: flex;
   flex-wrap: wrap;
   padding:1rem;
