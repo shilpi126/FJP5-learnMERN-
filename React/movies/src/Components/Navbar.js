@@ -1,11 +1,23 @@
 import React, { Component } from 'react'
+import {Link} from "react-router-dom";
 
 export default class navbar extends Component {
   render() {
     return (
-     <div style = {{ display:"flex",background:"white",color:"blue", padding:"1rem",justifyContent:"center",alignItems:"center"}}>
+     <div style = {{ display:"flex",
+     background:"white",
+     color:"blue", padding:"1rem",
+     justifyContent:"center",
+     alignItems:"center",
+     }}>
+
+      <Link to = "/" style={{textDecoration:"none"}}>
       <h1 >Movie App</h1>
-      <h2>Favorites</h2>
+      </Link>
+
+      <Link to = "/fav" style={{textDecoration:"none"}}>
+      <h2 style={{ marginLeft: "2rem" }}>Favorites</h2>
+      </Link>
       </div>
     )
   }

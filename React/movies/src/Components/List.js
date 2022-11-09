@@ -9,7 +9,7 @@ export default class List extends Component {
     this.state = {
       hover: "",
       parr: [1],
-      currPage: 5,
+      currPage: 1,
       movies:[],
     };
   }
@@ -25,6 +25,44 @@ export default class List extends Component {
       hover: "",
     });
   };
+
+  changeMovies = async () => {
+    console.log(this.state.currPage);
+    console.log("changeMovies called");
+    let ans = await axios.get(
+      `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.state.currPage}`
+      );
+    //console.log(ans.data);
+    this.setState({
+      movies:[...ans.data.results]//[{},{},{}]
+    });
+  };
+
+  handleNext = () => {
+    let tempArr = [];
+    for (let i=1; i <= this.state.parr.length + 1; i++){
+      tempArr.push(i);//[1,2]
+    }
+    this.setState({
+      parr:[...tempArr],
+      currPage: this.state.currPage + 1,
+    },this.changeMovies);
+
+  };
+
+  handlePrev = () => {
+    if (this.state.currPage != 1) {
+      this.setState({
+        currPage: this.state.currPage - 1
+      },this.changeMovies)
+    }
+  }
+
+  handlePageNum = (pageNum) => {
+    this.setState({
+      currPage: pageNum,
+    },this.changeMovies);
+  }
 
    async componentDidMount() {
 
@@ -64,13 +102,13 @@ export default class List extends Component {
              onMouseEnter={() => this.handleEnter(movieObj.id)}
              onMouseLeave = {this.handleLeave}
              >
-             <img src={`https://image.tmdb.org/t/p/original${movieObj.backdrop_path}`} className="card-img-top banner-img" alt="..." style={{height:"40vh", width:"20vw" }}/>
+             <img src={`https://image.tmdb.org/t/p/original${movieObj.backdrop_path}`} className="card-img-top banner-img" alt="..." style={{height:"60vh", width:"20vw" }}/>
              {/* <div className="card-body"> */}
                <h5 className="card-title movie-title">{movieObj.original_title}</h5>
                {/* <p className="card-text movie-text">{movieObj.overview}</p> */}
                 <div className="button-wrapper">
                   { this.state.hover == movieObj.id &&  
-                <a href="#" className = "btn btn-primary movie-button"
+                <a href="#" className = "btn btn-danger movie-button"
                   
                 >Add To Favorite</a> 
               }
@@ -83,7 +121,9 @@ export default class List extends Component {
           <nav aria-label="Page navigation example">
             <ul className="pagination">
                 <li className="page-item">
-                  <a className="page-link" href="#">Previous</a>
+                  <a className="page-link" 
+                  onClick={this.handlePrev}>
+                    Previous</a>
                 </li>
                 
                 
@@ -91,7 +131,7 @@ export default class List extends Component {
                 {this.state.parr.map((pageNum) => (//jsx + html use krna hai isliye ye bracket () use karenge.
                   
                 <li className="page-item">
-                  <a className="page-link" href="#" >
+                  <a className="page-link" onClick={() => {this.handlePageNum(pageNum)}} >
                     {pageNum}
                   </a>
                 </li>
@@ -100,7 +140,8 @@ export default class List extends Component {
                }
 
               <li className="page-item">
-                  <a className="page-link" href="#">Next</a>
+                  <a className="page-link" onClick={this.handleNext}>
+                    Next</a>
               </li>
              </ul>
            </nav>
