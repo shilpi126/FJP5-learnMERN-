@@ -87,7 +87,7 @@
   .movie-button{
     position: absolute;
     top: 80%;
-    left: 10px;
+    
     
   }
 
@@ -103,11 +103,11 @@
   }
 
   .favourites-list{
-    padding: 2rem;
+    padding: 3rem;
   }
 
   .favourites-table{
-    padding: 2rem;
+    padding: 3rem;
   }
 
 

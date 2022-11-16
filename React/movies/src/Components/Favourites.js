@@ -247,7 +247,7 @@ export default class Favourites extends Component {
                     <td scope="row">
                       <img
                         src={`https://image.tmdb.org/t/p/original${movieObj.backdrop_path}`}
-                        style={{ width: "6rem" }}
+                        style={{ width: "8rem" }}
                       />
                       {movieObj.original_title}
                     </td>
