@@ -2,15 +2,17 @@ import React, { Component } from 'react'
 //import { movies } from './getMovies'
 import axios from "axios"
 import API_KEY from '../secrets';
+import { movies } from './getMovies';
 export default class List extends Component {
   constructor () {
     super ();
     //console.log("constructor is called");
     this.state = {
       hover: "",
-      parr: [1],
+      parr: [1], //ab tak main konse page par hu , or what page result am i showing ,
       currPage: 1,
       movies:[],
+      favMov:[]//this will store the id of the movies added to favourites
     };
   }
 
@@ -64,6 +66,26 @@ export default class List extends Component {
     },this.changeMovies);
   }
 
+  handleFavourites = (movieObj) => {//jurassic park
+    let localStorageMovies = JSON.parse(localStorage.getItem("movies")) || [];
+
+    if(this.state.favMov.includes(movieObj.id)){
+      localStorageMovies=localStorageMovies.filter(
+        (movie) => movie.id != movieObj.id
+      );
+    }
+    else localStorageMovies.push(movieObj);
+    console.log(localStorageMovies);
+
+    localStorage.setItem("movies", JSON.stringify(localStorageMovies));
+
+    let tempData = localStorageMovies.map(movieObj => movieObj.id);
+    this.setState({
+      favMov: [...tempData]
+    });
+
+  }
+
    async componentDidMount() {
 
     //console.log("componentDidMount is called");
@@ -102,16 +124,21 @@ export default class List extends Component {
              onMouseEnter={() => this.handleEnter(movieObj.id)}
              onMouseLeave = {this.handleLeave}
              >
-             <img src={`https://image.tmdb.org/t/p/original${movieObj.backdrop_path}`} className="card-img-top banner-img" alt="..." style={{height:"60vh", width:"20vw" }}/>
+             <img src={`https://image.tmdb.org/t/p/original${movieObj.backdrop_path}`} className="card-img-top banner-img" alt="..." style={{height:"40vh", width:"20vw" }}/>
              {/* <div className="card-body"> */}
                <h5 className="card-title movie-title">{movieObj.original_title}</h5>
                {/* <p className="card-text movie-text">{movieObj.overview}</p> */}
+                
                 <div className="button-wrapper">
-                  { this.state.hover == movieObj.id &&  
-                <a href="#" className = "btn btn-danger movie-button"
+                  { this.state.hover == movieObj.id && ( 
+                <a 
+                 className = "btn btn-danger movie-button"
+                onClick={() => this.handleFavourites(movieObj)}
                   
-                >Add To Favorite</a> 
-              }
+                >
+                 {this.state.favMov.includes(movieObj.id)?"Remove from favourites":"Add to Favourites"} 
+                </a> 
+              )}
               </div>
              </div>
           

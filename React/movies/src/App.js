@@ -10,7 +10,15 @@ function App() {
     <BrowserRouter>
     <Navbar/>
     <Routes>
-    <Route path='/' element = {<List/>}/>
+    <Route path='/' element = {
+      <>
+      <Banner/>
+     <List/>
+     
+     
+     </>
+    }
+     />
 
     <Route path='/fav' element = {<Favourites/>}/>
     </Routes>
