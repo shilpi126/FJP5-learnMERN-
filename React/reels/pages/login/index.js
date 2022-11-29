@@ -3,26 +3,48 @@ import TextField from '@mui/material/TextField';
 import Image from "next/image"
 import logo from "../../assets/Instagram.jpeg";
 import Button from '@mui/material/Button';
-// import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { Carousel } from 'react-responsive-carousel';
+import bg1 from '../../assets/bg1.png';
+import bg2 from '../../assets/bg2.png';
+import bg3 from '../../assets/bg3.png';
+
 
 function index() {
   return (
-    <div className='signup-container'>
-        <div className='signup-card'>
+    <div className='login-container'>
+      <div className='insta-mob-bg'>
+      <Carousel 
+        autoPlay
+        interval={2000}
+        infiniteLoop
+        showArrows={false}//bcoz this is props that's way we use {} curly bracket.
+        showThumbs={false}
+        showIndicators={false}
+        stopOnHover
+        showStatus={false}>
+          
+        <Image src={bg1} style={{height:"900px",width:"410px"}}/>
+        <Image src={bg2} style={{height:"900px",width:"410px"}}/>
+        <Image src={bg3} style={{height:"900px",width:"410px"}}/>
+      </Carousel>
+
+      </div>
+      <div>
+        <div className='login-card'>
         <Image src={logo} />
         <TextField id="outlined-basic" 
         label="Outlined" 
         variant="outlined" 
         fullWidth 
         margin='dense'
-        size="small" />
+         />
 
         <TextField id="outlined-basic" 
         label="Email" 
         variant="outlined" 
         fullWidth 
         margin='dense'
-        size="small"/>
+        />
 
         <TextField id="outlined-basic" 
         label="Password" 
@@ -30,49 +52,35 @@ function index() {
         type="password"
          fullWidth 
          margin='dense'
-         size="small"/>
+         />
 
         
           <Button
+           style={{ marginTop: "1rem" }}
           color="secondary" 
           variant="outlined"  
           fullWidth 
           margin='dense'
-          size="small">
-
-         {/* <IconButton color="secondary">
-            <CloudUploadIcon />
-          </IconButton>  */}
-          Upload Profile Image
-          {/* <input hidden accept='image/*' multiple type="file/> */}
+          size='large'
          
-         
-          </Button>
+          >
+            log in
+            </Button>
          
 
-       <Button
-       style={{ marginTop: "1rem" }}
-       variant="contained" 
-       component="label"
-        margin='dense'
-         size="small"
-         fullWidth 
-         >
-         Sign Up
-        </Button>
-        <div className="tnc">
-          By signing up, you agree to our Terms, Conditions and Cookies policy.
-        </div>
+      
+
 
       
  
         </div>
         <div className="bottom-card">
-        Already Have an account ?{" "}
+        Don't Have an account ?{" "}
         {/* <Link href="/login"> */}
           <span style={{ color: "blueviolet" }}>Login</span>
         {/* </Link>  */}
       </div> 
+      </div>
 
    
     </div>
@@ -86,8 +94,3 @@ export default index
 
 
 
-
-// npm install @material-ui/core
-
-
-// yarn add @material-ui/core
