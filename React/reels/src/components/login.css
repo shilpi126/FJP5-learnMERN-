@@ -1,0 +1,52 @@
+.login-wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.login-card{
+    width: 27vw;
+    margin-top: 10%;
+}
+
+.insta-logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 3%;
+}
+
+.insta-logo img{
+    width: 15vw;
+}
+
+.login-text{
+    color: gray;
+    text-align: center;
+}
+
+.card2{
+    height: 5vh;
+    margin-top: 10px;
+
+}
+
+.image-crd {
+    background-image: url(../assets/Img.png);
+    background-size: cover;
+    margin-right: 40px;
+    
+    height: 670px;
+    width: 440px;
+    position: relative;
+}
+
+.crd{
+    height:600px;
+    width: 290px;
+    position: absolute;
+    left: 130px;
+    top: 40px;
+
+
+}
