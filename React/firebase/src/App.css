@@ -36,13 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-.light{
-  color: white;
-  background-color: black;
-}
-
-.dark{
-  color: rgb(244, 232, 3);
-  background-color: rgb(248, 7, 7);
-}

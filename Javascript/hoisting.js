@@ -1,7 +1,7 @@
 console.log("line 1" + a);
 greet ();
-console.log("line 3" + hello);
-//hello();
+//console.log("line 3" + hello);
+hello();
 var a = 10;
 
 // function
@@ -9,12 +9,12 @@ function greet() {
     console.log("hello pepcoders");
   }
 
-  //function expression 
+  //function expression => is case error dega
 var hello = function () {
     console.log("you guys are rock");
 }
 
-hello();
+
 
 // JavaScript Hoisting refers to the process whereby the interpreter appears to move the declaration of functions, variables to the top of their scope, prior to execution of the code.
 

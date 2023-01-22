@@ -10,7 +10,7 @@ var str = "Hello pepcoders";
 
 //---------------> strings in js are immutable <-------------------
 str[4] = "z";
-//console.log(str);//we can not change a string
+console.log(str);//we can not change a string 'Hello pepcoders'
 //console.log(str.length);
 
 //--------------------------> string method <--------------------------
@@ -67,8 +67,8 @@ let concatenatedStr = firstStr + secondStr;
 
  //-------------------> split method <--------------------
  var str = "Hello hello my name hello is Abhishek"
-console.log(str);
+//console.log(str);
 // divides string on the basis of argument and puts them in an array
 var a=str.split("hello");
-console.log(a);//[ 'Hello ', ' my name ', ' is Abhishek' ]
+//console.log(a);//[ 'Hello ', ' my name ', ' is Abhishek' ]
 

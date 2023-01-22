@@ -10,6 +10,7 @@ import Insta from '../assets/Insta.png'
 
 
 
+
 import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
 
@@ -43,7 +44,10 @@ export default function Signup() {
                         <CloudUploadIcon sx={{mr:2}}/>
                         Upload Profile Image
                         
-                        <input  type="file" accept="image/"   />
+                        <input type="file" accept="image/" />
+                        
+                        
+                        
                         
                         
                         </Button>
