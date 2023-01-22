@@ -13,9 +13,11 @@ import { fetchAllCategories } from '../features/categories-slice';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-//import { useTheme } from '@mui/material';
-//import { useTheme } from '@emotion/react';
+import { useSearchParams , Link} from 'react-router-dom';
+
+import SearchIcon from '@mui/icons-material/Search';
+import { getThemeProps } from '@mui/system';
+
 
 
 
@@ -33,8 +35,54 @@ const Search = styled ('section')(({theme}) => ({
 
 }))
 
+
+const StyleAutoComplete  = styled (Autocomplete)(({theme}) => ({
+  color:"inherit",
+  width:"100%",
+  "& .MuiTextField-root":{
+    paddingRight: `calc(1em + ${theme.spacing(4)})`
+  },
+
+  "& .MuiInputBase-input":{
+    color:theme.palette.common.white,
+  },
+
+  "& .MuiOutlinedInput-notchedOutline":{
+    border:"none"
+  },
+
+  "& .MuiSvgIcon-root":{
+    getThemeProps:theme.palette.common.white,
+    fill: theme.palette.common.white,
+
+    
+  }
+
+
+
+}));
+
+const SearchIconWrapper  = styled ("section")(({theme}) => ({
+    padding:theme.spacing(0,2),
+    height:"100%",
+    position:"absolute",
+    right:0,
+    pointerEvents:"none",
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center"
+    
+}));
+
+const StyledLink  = styled (Link)(({theme}) => ({
+
+  color:theme.palette.common.white,
+  textDecoration:"none",
+}));
+
+
 function SearchBar(){
-  //const theme = useTheme()
+  
   const products = useSelector(state => state.products.value)
   const categories = useSelector(state => state.categories?.value)
   const dispatch = useDispatch()
@@ -56,8 +104,7 @@ function SearchBar(){
 
   function handleCategoryChange(event){
     const {value} = event.target;
-  
-
+    
     navigate(value === 'all'? '/': `/?category=${value}${searchTerm ? '&searchTerm=' * searchTerm : ''}`);
   }
 
@@ -73,7 +120,7 @@ function SearchBar(){
   
   return  <Search>
             <Select
-
+            
             value={selectedCategory}
             size="small" sx={{m:2,'&':{},
             textTransform:"capitalize",
@@ -92,10 +139,9 @@ function SearchBar(){
                 ".MuiSvgIcon-root":{
                   color:"common.white"
                 }
-              
-
-            }
-          }} variant='standard' 
+              }
+          }} 
+          variant='standard' 
               labelId='selected-category'
               id='selected-category-id'
               onChange={handleCategoryChange}
@@ -109,19 +155,20 @@ function SearchBar(){
               {categories?.map((category) => {
                 return(
                   <MenuItem 
-                  sx={{textTransform:"capitalize"}}
-                  key={category}
-                  value={category}>
-                  {category}
-                </MenuItem>
+                    sx={{textTransform:"capitalize"}}
+                    key={category}
+                    value={category}>
+                    {category}
+                  </MenuItem>
                 )
               }
                 
               )}
             </Select>
-            <Autocomplete
-              value={selectedProduct}
-              onChange={(e, value) => {
+            <StyleAutoComplete
+                freeSolo
+                value={selectedProduct}
+                onChange={(e, value) => {
                 console.log(value);
                 handleSearchChange(value?.label);
               }}
@@ -130,32 +177,42 @@ function SearchBar(){
                 options={Array.from(selectedCategory === 'all' ? products : products.filter((prod) => prod.category === selectedCategory) ,
                 (prod) => ({id: prod.id, label: prod.title})
                 )}
-                sx={{ width: 300 }}
+                // sx={{ width: 300 }} 
                 renderInput={(params) => <TextField {...params} />}
               /> 
+
+              <SearchIconWrapper >
+                <SearchIcon/>
+              </SearchIconWrapper>
 
           </Search>
 }
 
 export default function Header() {
   const cartItems = useSelector((state) => state.cart.value)
-  
+  const navigate = useNavigate();
   const count = getItemCount(cartItems)
+
+  function navigateToCard (){
+    navigate("/cart");
+  }
   
   return (
-    <AppBar position='sticky'>
-        <Toolbar>
+    <AppBar position='sticky' sx={{py:1,}}>
+        <Toolbar   sx={{display:"flex", gap:2}}>
             
-            <Typography variant='h6' color='inherit' sx={{flexGrow: 1,}}>
-              Ecomm
+            <Typography variant='h6' color='inherit' sx={{flexGrow: 1}}>
+              < StyledLink to="/">
+                  Ecomm
+              </StyledLink>
+          
             </Typography>
             <SearchBar />
             <Box sz={{display:{ md: 'flex'}}}>
-            <IconButton size="large" aria-label='shows cart items count' color="inherit">
+            <IconButton  onClick={navigateToCard} size="large" aria-label='shows cart items count' color="inherit">
                 <Badge badgeContent={count} color="error">
                     <ShoppingCartIcon/>
                 </Badge>
-
             </IconButton>
             </Box>
             <Button color='inherit'>Login</Button>

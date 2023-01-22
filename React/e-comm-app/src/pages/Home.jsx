@@ -57,7 +57,7 @@ return (
             filteredProducts?.map(({title, id, price, description, rating, image}) => {
                 return(
             <Grid item key={id} xs={12} sm={6} md={3}>
-                <Card>
+                <Card sx={{height:"100%", display:"flex", flexDirection:"column", padding:theme.spacing(2, 0)}}>
                     <CardMedia component='img' sx={{alignSelf:'center', width: theme.spacing(30), height:theme.spacing(30), objectFit:'contain', pt:theme.spacing()}} image={image} alt={title}/>
                     <CardContent>
                         <Typography variant='h5' component='h2' gutterBottom 
