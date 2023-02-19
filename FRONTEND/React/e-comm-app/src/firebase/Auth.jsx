@@ -3,7 +3,14 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth"
+import { createUserWithEmailAndPassword,
+        getAuth,
+        onAuthStateChanged,
+        signInWithEmailAndPassword,
+        signOut, 
+        updateProfile,
+    } from "firebase/auth"
+
 import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
@@ -35,15 +42,19 @@ export const useAuth = () => useContext(AuthContext);
 
 function useProviderAuth(){
     const [user, setUser] = useState();
-
-    const signUp = (email, password, displayName) => createUserWithEmailAndPassword(auth,email, password).then(({user}) => {
+    
+    const signUp = (email, password, displayName) => 
+    createUserWithEmailAndPassword(auth , email, password )
+    .then(({user}) => {
         updateProfile(user, {displayName});
         setUser(user);
         return user;
-
+    
     });
 
-    const signIn = (email, password) => signInWithEmailAndPassword(auth,email, password).then(({user}) =>{
+    const signIn = (email, password) => 
+    signInWithEmailAndPassword(auth,email, password)
+    .then(({user}) =>{
         setUser(user);
         return user;
     });

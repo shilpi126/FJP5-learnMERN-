@@ -1,11 +1,11 @@
 import React from 'react'
-import { Avatar, Box, Container, CssBaseline, FormControl,  TextField, Typography, useTheme } from '@mui/material'
+import { Avatar, Box, Container, CssBaseline, FormControl,  Grid,  TextField, Typography, useTheme } from '@mui/material'
 
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 import {Button} from '@mui/material'
 
-import {Form, useNavigate} from "react-router-dom";
+import {Form, Link, useNavigate} from "react-router-dom";
 import { useAuth } from '../firebase/Auth';
 
 export default function Login() {
@@ -86,9 +86,17 @@ export default function Login() {
             margin: theme.spacing(3, 0, 2),
           }}
           
-          >Sign In</Button>
+          >Sign In
+          </Button>
 
           </Form>
+          <Grid container justifyContent={'flex-end'}>
+                    <Grid item>
+                        <Link  variant="body2" to='/register'>
+                            New User? Sign Up
+                        </Link>
+                    </Grid>
+                </Grid>
         </Box>
       </CssBaseline>
     </Container>

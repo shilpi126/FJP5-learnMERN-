@@ -14,6 +14,7 @@ import {Provider} from 'react-redux'
 import {store} from './store'
 import Checkout from './pages/Checkout'
 import  AuthProvider, { useAuth } from './firebase/Auth'
+import Register from './pages/Register'
 
 //force user to signin using protectRoute.
 function ProtectedRoute ({children}){
@@ -38,12 +39,12 @@ const router = createBrowserRouter(
     />
     </Route>
     <Route path='/login' index element={<Login />}/>
+    <Route path='/register' index element={<Register />}/>
     </>
     )
 )
 
 function App() {
-
   
   return (
   <AuthProvider >
@@ -52,11 +53,6 @@ function App() {
     </Provider>
   </AuthProvider>
   )
-
-  
-      
-    
-    
   
 }
 
