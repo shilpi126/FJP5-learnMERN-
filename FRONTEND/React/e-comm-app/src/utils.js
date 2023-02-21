@@ -4,7 +4,7 @@ export function getItemCount (cartItems){
     
 }
 
-export function getSubTotal(cartItem){
+export  function getSubTotal(cartItem){
     return cartItem.reduce((sum, {product, quantity}) =>product.price * quantity + sum,0)
 }
 

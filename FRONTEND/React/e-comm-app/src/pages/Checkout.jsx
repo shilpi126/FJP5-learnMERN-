@@ -1,6 +1,12 @@
 import { Box, Button, Container, Paper, Step, StepLabel, Stepper, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import AddressForm from '../components/AddressForm'
+import PaymentForm from '../components/PaymentForm'
+import ReviewForm from '../components/ReviewForm'
+import { clearCart } from '../features/cart-slice'
+import { clearCheckoutInformation } from '../features/checkout-slice'
+import {Link } from "react-router-dom"
 
 const steps = ["Shipping Address", "Payment Details", "Review Order"]
 function getStepContent(activeStep){
@@ -8,16 +14,26 @@ function getStepContent(activeStep){
     case 0 : 
     return <AddressForm/>;
     case 1:
-    return <h1>payment details</h1>;
+    return <PaymentForm/>;
     case 2:
-      return <h1>review</h1>;
+      return <ReviewForm/>;
     default:
       throw new Error("Unknown step")
   }
 }
 
 export default function Checkout() {
+
+
   const [activeStep, setActiveStep] = useState(0);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if(activeStep === steps.length){
+      dispatch(clearCart());
+      dispatch((clearCheckoutInformation()));
+    }
+  })
 
   function handleNext (){
     setActiveStep(activeStep + 1);
@@ -57,6 +73,7 @@ export default function Checkout() {
         <Typography>
           Your order number is #12234. We have emailed you the details regaeding your order confirmation.
         </Typography>
+        <Link to="/">Shop More</Link>
         </> ):(<>{getStepContent(activeStep)}
         <Box sx={{display:"flex", justifyContent:"flex-end"}}>
           {activeStep !==0 && <Button 
